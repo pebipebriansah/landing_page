@@ -1,612 +1,910 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="assets/images/logo.png"
+      type="image/png"
+      sizes="16x16"
+    />
     <title>Cengek - Aplikasi Pintar untuk Petani Cabai</title>
-    
+
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    typography: {
-                        DEFAULT: {
-                        css: {
-                            'text-align': 'justify',
-                        },
-                        },
-                    },
-                    colors: {
-                        primary: '#e74c3c',
-                        primaryDark: '#c0392b',
-                        secondary: '#2ecc71',
-                        secondaryDark: '#27ae60',
-                        dark: '#16213e',
-                        darker: '#0f172a',
-                        light: '#f8f9fa',
-                        gray: '#adb5bd'
-                    },
-                    fontFamily: {
-                        poppins: ['Poppins', 'sans-serif'],
-                        roboto: ['Roboto', 'sans-serif']
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'scroll': 'scroll 30s linear infinite'
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(-50%) translateX(0)' },
-                            '50%': { transform: 'translateY(-53%) translateX(10px)' }
-                        },
-                        scroll: {
-                            '0%': { transform: 'translateX(0)' },
-                            '100%': { transform: 'translateX(-50%)' }
-                        }
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            typography: {
+              DEFAULT: {
+                css: {
+                  "text-align": "justify",
+                },
+              },
+            },
+            colors: {
+              primary: "#e74c3c",
+              primaryDark: "#c0392b",
+              secondary: "#2ecc71",
+              secondaryDark: "#27ae60",
+              dark: "#16213e",
+              darker: "#0f172a",
+              light: "#f8f9fa",
+              gray: "#adb5bd",
+            },
+            fontFamily: {
+              poppins: ["Poppins", "sans-serif"],
+              roboto: ["Roboto", "sans-serif"],
+            },
+            animation: {
+              float: "float 6s ease-in-out infinite",
+              scroll: "scroll 30s linear infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(-50%) translateX(0)" },
+                "50%": { transform: "translateY(-53%) translateX(10px)" },
+              },
+              scroll: {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(-50%)" },
+              },
+            },
+          },
+        },
+      };
     </script>
 
     <style type="text/css">
-        body {
-            background-color: #0f172a;
-            color: #f8f9fa;
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
+      body {
+        background-color: #0f172a;
+        color: #f8f9fa;
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
 
-        .navbar {
-            background-color: rgba(22, 33, 62, 0.7);
-            backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
-        }
+      html {
+        scroll-behavior: smooth;
+      }
 
-        .hero {
-            background-image: url('assets/images/petani.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-        }
+      .navbar {
+        background-color: rgba(22, 33, 62, 0.7);
+        backdrop-filter: blur(12px);
+        transition: all 0.3s ease;
+      }
 
-        .feature-card {
-            backdrop-filter: blur(10px);
-            background-color: rgba(22, 33, 62, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
+      .hero {
+        background-image: url("assets/images/petani.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+      }
 
-        .supporter-logo {
-            filter: grayscale(100%) brightness(150%);
-            transition: filter 0.3s;
-        }
+      .feature-card {
+        backdrop-filter: blur(10px);
+        background-color: rgba(22, 33, 62, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+      }
 
-        .supporter-item:hover .supporter-logo {
-            filter: grayscale(0%) brightness(100%);
-        }
+      .supporter-logo {
+        filter: grayscale(100%) brightness(150%);
+        transition: filter 0.3s;
+      }
 
-        .supporters-track:hover {
-            animation-play-state: paused;
-        }
-        
+      .supporter-item:hover .supporter-logo {
+        filter: grayscale(0%) brightness(100%);
+      }
+
+      .supporters-track:hover {
+        animation-play-state: paused;
+      }
+
+      .target-section {
+        scroll-margin-top: 100px;
+      }
+
+      .ai-image {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        transition: transform 0.4s ease;
+      }
+
+      .ai-image:hover {
+        transform: scale(1.03);
+      }
+
+      @media (max-width: 768px) {
         .target-section {
-            scroll-margin-top: 100px;
+          scroll-margin-top: 80px;
         }
-        
-        .ai-image {
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.4s ease;
-        }
-        
-        .ai-image:hover {
-            transform: scale(1.03);
-        }
-        
-        @media (max-width: 768px) {
-            .target-section {
-                scroll-margin-top: 80px;
-            }
-        }
+      }
     </style>
-</head>
-<body class="antialiased">
+  </head>
+  <body class="antialiased">
     <!-- Navbar -->
-    <nav id="navbar" class="navbar fixed top-0 left-0 w-full py-5 px-5 md:px-10 lg:px-20 flex justify-between items-center bg-[#16213e]/85 z-50">
-        <a href="#" class="logo flex items-center text-2xl font-bold text-white">
-            <div class="bg-white w-10 h-10 rounded-full flex items-center justify-center mr-2">
-                <img src="assets/images/logo.png" alt="Cengek Logo" class="w-8 h-8">
-            </div>
-            Ceng<span class="text-primary">ek</span>
+    <nav
+      id="navbar"
+      class="navbar fixed top-0 left-0 w-full py-5 px-5 md:px-10 lg:px-20 flex justify-between items-center bg-[#16213e]/85 z-50"
+    >
+      <a href="#" class="logo flex items-center text-2xl font-bold text-white">
+        <div
+          class="bg-white w-10 h-10 rounded-full flex items-center justify-center mr-2"
+        >
+          <img src="assets/images/logo.png" alt="Cengek Logo" class="w-8 h-8" />
+        </div>
+        Ceng<span class="text-primary">ek</span>
+      </a>
+
+      <div class="nav-links hidden md:flex gap-6">
+        <a
+          href="#"
+          class="nav-link text-white hover:text-primary transition-colors relative py-1"
+        >
+          <i class="fas fa-home mr-2"></i>Dashboard
+          <span
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300"
+          ></span>
         </a>
-        
-        <div class="nav-links hidden md:flex gap-6">
-            <a href="#" class="nav-link text-white hover:text-primary transition-colors relative py-1">
-                <i class="fas fa-home mr-2"></i>Dashboard
-                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300"></span>
-            </a>
-            <a href="#contact" class="nav-link text-white hover:text-primary transition-colors relative py-1">
-                <i class="fas fa-phone mr-2"></i>Kontak
-                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300"></span>
-            </a>
-            <a href="#supporters" class="nav-link text-white hover:text-primary transition-colors relative py-1">
-                <i class="fas fa-handshake mr-2"></i>Dukungan
-                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300"></span>
-            </a>
-        </div>
-        
-        <button id="menuBtn" class="md:hidden text-white text-2xl z-50">
-            <i class="fas fa-bars"></i>
-        </button>
-        
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="md:hidden fixed top-0 left-0 w-full h-screen bg-darker/95 backdrop-blur-md flex flex-col items-center justify-center gap-8 transition-all duration-300 transform -translate-y-full z-40">
-            <a href="#" class="mobile-nav-link text-2xl text-white hover:text-primary transition-colors">
-                <i class="fas fa-home mr-3"></i>Dashboard
-            </a>
-            <a href="#contact" class="mobile-nav-link text-2xl text-white hover:text-primary transition-colors">
-                <i class="fas fa-phone mr-3"></i>Kontak
-            </a>
-            <a href="#supporters" class="mobile-nav-link text-2xl text-white hover:text-primary transition-colors">
-                <i class="fas fa-handshake mr-3"></i>Dukungan
-            </a>
-            <a href="#" class="mobile-nav-link text-2xl text-white hover:text-primary transition-colors">
-                <i class="fas fa-user mr-3"></i>Login
-            </a>
-        </div>
+        <a
+          href="#contact"
+          class="nav-link text-white hover:text-primary transition-colors relative py-1"
+        >
+          <i class="fas fa-phone mr-2"></i>Kontak
+          <span
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300"
+          ></span>
+        </a>
+        <a
+          href="#supporters"
+          class="nav-link text-white hover:text-primary transition-colors relative py-1"
+        >
+          <i class="fas fa-handshake mr-2"></i>Dukungan
+          <span
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300"
+          ></span>
+        </a>
+      </div>
+
+      <button id="menuBtn" class="md:hidden text-white text-2xl z-50">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobileMenu"
+        class="md:hidden fixed top-0 left-0 w-full h-screen bg-darker/95 backdrop-blur-md flex flex-col items-center justify-center gap-8 transition-all duration-300 transform -translate-y-full z-40"
+      >
+        <a
+          href="#"
+          class="mobile-nav-link text-2xl text-white hover:text-primary transition-colors"
+        >
+          <i class="fas fa-home mr-3"></i>Dashboard
+        </a>
+        <a
+          href="#contact"
+          class="mobile-nav-link text-2xl text-white hover:text-primary transition-colors"
+        >
+          <i class="fas fa-phone mr-3"></i>Kontak
+        </a>
+        <a
+          href="#supporters"
+          class="mobile-nav-link text-2xl text-white hover:text-primary transition-colors"
+        >
+          <i class="fas fa-handshake mr-3"></i>Dukungan
+        </a>
+        <a
+          href="#"
+          class="mobile-nav-link text-2xl text-white hover:text-primary transition-colors"
+        >
+          <i class="fas fa-user mr-3"></i>Login
+        </a>
+      </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero relative min-h-screen flex items-center py-20 px-5 md:px-10 lg:px-20 overflow-hidden">
-        <div class="hero-content relative z-10 max-w-2xl">
-            <p class="hero-subtitle text-secondary uppercase tracking-wider font-semibold mb-4">Solusi Digital untuk Petani Cabai</p>
-            <h1 class="hero-title text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 bg-gradient-to-r from-primary to-yellow-500 bg-clip-text text-transparent">
-                Cegah Mengenali Gejala dan Kendala
-            </h1>
-            <p class="hero-text text-lg text-light/90 mb-8 leading-relaxed max-w-3xl text-justify">
-                Cengek adalah aplikasi inovatif yang membantu petani cabai di Majalengka dalam memantau harga pasar, mendeteksi penyakit tanaman, dan mendapatkan rekomendasi perawatan berbasis AI untuk meningkatkan hasil panen.
-            </p>
-            <div class="flex flex-wrap gap-4">
-                <a href="assets/apk/cengek.apk" class="btn inline-block px-8 py-4 bg-gradient-to-r from-primary to-primaryDark text-white font-semibold rounded-full shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:-translate-y-1">
-                    Download Sekarang <i class="fas fa-download ml-2"></i>
-                </a>
-                <a href="#features" class="btn inline-block px-8 py-4 bg-white/10 text-white font-semibold rounded-full shadow-lg hover:bg-white/20 transition-all duration-300 hover:-translate-y-1">
-                    Pelajari Fitur <i class="fas fa-arrow-down ml-2"></i>
-                </a>
-            </div>
+    <section
+      class="hero relative min-h-screen flex items-center py-20 px-5 md:px-10 lg:px-20 overflow-hidden"
+    >
+      <div class="hero-content relative z-10 max-w-2xl">
+        <p
+          class="hero-subtitle text-secondary uppercase tracking-wider font-semibold mb-4"
+        >
+          Solusi Digital untuk Petani Cabai
+        </p>
+        <h1
+          class="hero-title text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 bg-gradient-to-r from-primary to-yellow-500 bg-clip-text text-transparent"
+        >
+          Cegah Mengenali Gejala dan Kendala
+        </h1>
+        <p
+          class="hero-text text-lg text-light/90 mb-8 leading-relaxed max-w-3xl text-justify"
+        >
+          Cengek adalah aplikasi inovatif yang membantu petani cabai di
+          Majalengka dalam memantau harga pasar, mendeteksi penyakit tanaman,
+          dan mendapatkan rekomendasi perawatan berbasis AI untuk meningkatkan
+          hasil panen.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="assets/apk/cengek.apk"
+            class="btn inline-block px-8 py-4 bg-gradient-to-r from-primary to-primaryDark text-white font-semibold rounded-full shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:-translate-y-1"
+          >
+            Download Sekarang <i class="fas fa-download ml-2"></i>
+          </a>
+          <a
+            href="#features"
+            class="btn inline-block px-8 py-4 bg-white/10 text-white font-semibold rounded-full shadow-lg hover:bg-white/20 transition-all duration-300 hover:-translate-y-1"
+          >
+            Pelajari Fitur <i class="fas fa-arrow-down ml-2"></i>
+          </a>
         </div>
+      </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="features py-20 px-5 md:px-10 lg:px-20 bg-darker target-section">
-        <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-16 relative">
-            Fitur Unggulan
-            <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-primary to-yellow-500 rounded-full"></span>
-        </h2>
-        
-        <div class="features-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <!-- Feature 1 -->
-            <div class="feature-card bg-dark/60 border border-white/5 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-                <div class="feature-icon text-primary text-5xl mb-6">
-                    <i class="fas fa-bug"></i>
-                </div>
-                <h3 class="feature-title text-xl font-bold text-white mb-4">Deteksi Penyakit Cabai</h3>
-                <p class="feature-text text-gray-400">
-                    Identifikasi penyakit tanaman cabai dengan pemindaian AI melalui kamera smartphone. Dapatkan diagnosis instan dan rekomendasi penanganan.
-                </p>
-            </div>
-            
-            <!-- Feature 2 -->
-            <div class="feature-card bg-dark/60 border border-white/5 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-                <div class="feature-icon text-primary text-5xl mb-6">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3 class="feature-title text-xl font-bold text-white mb-4">Analisis Harga Pasar</h3>
-                <p class="feature-text text-gray-400">
-                    Pantau harga cabai real-time di pasar tradisional Majalengka. Dapatkan rekomendasi pasar terbaik untuk menjual hasil panen Anda.
-                </p>
-            </div>
-            
-            <!-- Feature 3 -->
-            <div class="feature-card bg-dark/60 border border-white/5 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-                <div class="feature-icon text-primary text-5xl mb-6">
-                    <i class="fas fa-cloud-sun"></i>
-                </div>
-                <h3 class="feature-title text-xl font-bold text-white mb-4">Rekomendasi Perawatan</h3>
-                <p class="feature-text text-gray-400">
-                    Sesuaikan perawatan tanaman berdasarkan kondisi cuaca dan prediksi hujan untuk memaksimalkan hasil panen.
-                </p>
-            </div>
-            
-            <!-- Feature 4 -->
-            <div class="feature-card bg-dark/60 border border-white/5 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-                <div class="feature-icon text-primary text-5xl mb-6">
-                    <i class="fas fa-calculator"></i>
-                </div>
-                <h3 class="feature-title text-xl font-bold text-white mb-4">Kalkulator Keuntungan</h3>
-                <p class="feature-text text-gray-400">
-                    Hitung estimasi keuntungan berdasarkan biaya produksi dan harga pasar di berbagai lokasi penjualan.
-                </p>
-            </div>
-            
-            <!-- Feature 5 -->
-            <div class="feature-card bg-dark/60 border border-white/5 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-                <div class="feature-icon text-primary text-5xl mb-6">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <h3 class="feature-title text-xl font-bold text-white mb-4">Tanya AI</h3>
-                <p class="feature-text text-gray-400">
-                    Konsultasikan masalah pertanian Anda dengan asisten AI khusus yang memahami budidaya cabai.
-                </p>
-            </div>
-            
-            <!-- Feature 6 -->
-            <div class="feature-card bg-dark/60 border border-white/5 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-                <div class="feature-icon text-primary text-5xl mb-6">
-                    <i class="fas fa-map-marked-alt"></i>
-                </div>
-                <h3 class="feature-title text-xl font-bold text-white mb-4">Pasar Cabai Majalengka</h3>
-                <p class="feature-text text-gray-400">
-                    Temukan pasar dengan harga cabai terbaik di wilayah Kabupaten Majalengka.
-                </p>
-            </div>
+    <section
+      id="features"
+      class="features py-20 px-5 md:px-10 lg:px-20 bg-darker target-section"
+    >
+      <h2
+        class="section-title text-3xl md:text-4xl font-bold text-center mb-16 relative"
+      >
+        Fitur Unggulan
+        <span
+          class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-primary to-yellow-500 rounded-full"
+        ></span>
+      </h2>
+
+      <div
+        class="features-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+      >
+        <!-- Feature 1 -->
+        <div
+          class="feature-card bg-dark/60 border border-white/5 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+        >
+          <div class="feature-icon text-primary text-5xl mb-6">
+            <i class="fas fa-bug"></i>
+          </div>
+          <h3 class="feature-title text-xl font-bold text-white mb-4">
+            Deteksi Penyakit Cabai
+          </h3>
+          <p class="feature-text text-gray-400">
+            Identifikasi penyakit tanaman cabai dengan pemindaian AI melalui
+            kamera smartphone. Dapatkan diagnosis instan dan rekomendasi
+            penanganan.
+          </p>
         </div>
+
+        <!-- Feature 2 -->
+        <div
+          class="feature-card bg-dark/60 border border-white/5 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+        >
+          <div class="feature-icon text-primary text-5xl mb-6">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3 class="feature-title text-xl font-bold text-white mb-4">
+            Analisis Harga Pasar
+          </h3>
+          <p class="feature-text text-gray-400">
+            Pantau harga cabai real-time di pasar tradisional Majalengka.
+            Dapatkan rekomendasi pasar terbaik untuk menjual hasil panen Anda.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div
+          class="feature-card bg-dark/60 border border-white/5 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+        >
+          <div class="feature-icon text-primary text-5xl mb-6">
+            <i class="fas fa-cloud-sun"></i>
+          </div>
+          <h3 class="feature-title text-xl font-bold text-white mb-4">
+            Rekomendasi Perawatan
+          </h3>
+          <p class="feature-text text-gray-400">
+            Sesuaikan perawatan tanaman berdasarkan kondisi cuaca dan prediksi
+            hujan untuk memaksimalkan hasil panen.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div
+          class="feature-card bg-dark/60 border border-white/5 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+        >
+          <div class="feature-icon text-primary text-5xl mb-6">
+            <i class="fas fa-calculator"></i>
+          </div>
+          <h3 class="feature-title text-xl font-bold text-white mb-4">
+            Kalkulator Keuntungan
+          </h3>
+          <p class="feature-text text-gray-400">
+            Hitung estimasi keuntungan berdasarkan biaya produksi dan harga
+            pasar di berbagai lokasi penjualan.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div
+          class="feature-card bg-dark/60 border border-white/5 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+        >
+          <div class="feature-icon text-primary text-5xl mb-6">
+            <i class="fas fa-robot"></i>
+          </div>
+          <h3 class="feature-title text-xl font-bold text-white mb-4">
+            Tanya AI
+          </h3>
+          <p class="feature-text text-gray-400">
+            Konsultasikan masalah pertanian Anda dengan asisten AI khusus yang
+            memahami budidaya cabai.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div
+          class="feature-card bg-dark/60 border border-white/5 rounded-2xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+        >
+          <div class="feature-icon text-primary text-5xl mb-6">
+            <i class="fas fa-map-marked-alt"></i>
+          </div>
+          <h3 class="feature-title text-xl font-bold text-white mb-4">
+            Pasar Cabai Majalengka
+          </h3>
+          <p class="feature-text text-gray-400">
+            Temukan pasar dengan harga cabai terbaik di wilayah Kabupaten
+            Majalengka.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- AI Section -->
-    <section class="ai-section py-20 px-5 md:px-10 lg:px-20 bg-gradient-to-br from-dark to-[#1a1a2e]">
-        <div class="container mx-auto max-w-6xl flex flex-col lg:flex-row items-center gap-10">
-            <div class="ai-content flex-1">
-                <h2 class="ai-title text-3xl md:text-4xl font-bold mb-6 text-white">
-                    Teknologi <span class="text-primary">Kecerdasan Buatan</span> untuk Pertanian Modern
-                </h2>
-                <p class="ai-text text-gray-400 mb-6 leading-relaxed">
-                    Cengek menggunakan teknologi machine learning terkini untuk menganalisis gambar tanaman cabai dan memberikan diagnosis penyakit yang akurat. Sistem kami telah dilatih dengan ribuan gambar penyakit cabai untuk memastikan hasil yang dapat diandalkan.
-                </p>
-                <p class="ai-text text-gray-400 mb-8 leading-relaxed">
-                    Selain deteksi penyakit, AI kami juga memberikan rekomendasi perawatan spesifik berdasarkan kondisi cuaca lokal, jenis tanah, dan fase pertumbuhan tanaman. Dengan Cengek, petani mendapatkan asisten ahli yang selalu siap membantu 24/7.
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-3">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <span class="text-white">Akurasi hingga 95%</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-3">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <span class="text-white">Update database berkala</span>
-                    </div>
-                </div>
+    <section
+      class="ai-section py-20 px-5 md:px-10 lg:px-20 bg-gradient-to-br from-dark to-[#1a1a2e]"
+    >
+      <div
+        class="container mx-auto max-w-6xl flex flex-col lg:flex-row items-center gap-10"
+      >
+        <div class="ai-content flex-1">
+          <h2 class="ai-title text-3xl md:text-4xl font-bold mb-6 text-white">
+            Teknologi <span class="text-primary">Kecerdasan Buatan</span> untuk
+            Pertanian Modern
+          </h2>
+          <p class="ai-text text-gray-400 mb-6 leading-relaxed">
+            Cengek menggunakan teknologi machine learning terkini untuk
+            menganalisis gambar tanaman cabai dan memberikan diagnosis penyakit
+            yang akurat. Sistem kami telah dilatih dengan ribuan gambar penyakit
+            cabai untuk memastikan hasil yang dapat diandalkan.
+          </p>
+          <p class="ai-text text-gray-400 mb-8 leading-relaxed">
+            Selain deteksi penyakit, AI kami juga memberikan rekomendasi
+            perawatan spesifik berdasarkan kondisi cuaca lokal, jenis tanah, dan
+            fase pertumbuhan tanaman. Dengan Cengek, petani mendapatkan asisten
+            ahli yang selalu siap membantu 24/7.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <div class="flex items-center">
+              <div
+                class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-3"
+              >
+                <i class="fas fa-check"></i>
+              </div>
+              <span class="text-white">Akurasi hingga 95%</span>
             </div>
-            
-            <div class="ai-image flex-1">
-                <div class="relative">
-                    <div class="absolute -inset-4 bg-gradient-to-r from-primary to-yellow-500 rounded-3xl transform rotate-6 opacity-20 blur-lg"></div>
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-                        <img src="assets/images/ai.jpg" alt="AI Technology" class="w-full h-auto">
-                    </div>
-                </div>
+            <div class="flex items-center">
+              <div
+                class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-3"
+              >
+                <i class="fas fa-check"></i>
+              </div>
+              <span class="text-white">Update database berkala</span>
             </div>
+          </div>
         </div>
+
+        <div class="ai-image flex-1">
+          <div class="relative">
+            <div
+              class="absolute -inset-4 bg-gradient-to-r from-primary to-yellow-500 rounded-3xl transform rotate-6 opacity-20 blur-lg"
+            ></div>
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src="assets/images/ai.jpg"
+                alt="AI Technology"
+                class="w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Supporters Section -->
-    <section id="supporters" class="supporters py-20 px-5 bg-darker target-section">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="supporters-title text-3xl md:text-4xl font-bold text-center mb-16 relative">
-                Didukung Oleh
-                <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-primary to-yellow-500 rounded-full"></span>
-            </h2>
-            
-            <div class="supporters-container overflow-hidden relative py-5">
-                <div class="supporters-track flex w-max animate-scroll">
-                    <!-- Supporter Items -->
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Microsoft_Azure_Logo.svg/2560px-Microsoft_Azure_Logo.svg.png" alt="Microsoft Azure" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Microsoft Azure</span>
-                    </div>
-                    
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="assets/images/support/elevalte.png" alt="Elevalte" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Elevalte</span>
-                    </div>
-                    
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="assets/images/support/biji_biji.png" alt="Biji-Biji Initiative" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Biji-Biji Initiative</span>
-                    </div>
-                    
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="assets/images/support/mereka.jpg" alt="Mereka" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Mereka</span>
-                    </div>
-                    
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="assets/images/support/binus.png" alt="Binus" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Binus</span>
-                    </div>
-                    
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="assets/images/support/great_nusa.png" alt="GreatNusa" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">GreatNusa</span>
-                    </div>
-                    
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="assets/images/support/telkom.png" alt="Telkom University" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Telkom University</span>
-                    </div>
-                    
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="assets/images/support/bandung.png" alt="Bandung Techno Park" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Bandung Techno Park</span>
-                    </div>
-                    
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="assets/images/support/ugm.png" alt="UGM" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Universitas Gadjah Mada</span>
-                    </div>
-                    
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="assets/images/support/bradwijaya.png" alt="Universitas Brawijaya" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Universitas Brawijaya</span>
-                    </div>
-                    
-                    <!-- Duplicate for seamless loop -->
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Microsoft_Azure_Logo.svg/2560px-Microsoft_Azure_Logo.svg.png" alt="Microsoft Azure" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Microsoft Azure</span>
-                    </div>
-                    
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="assets/images/support/elevalte.png" alt="Elevalte" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Elevalte</span>
-                    </div>
-                    
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="assets/images/support/biji_biji.png" alt="Biji-Biji Initiative" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Biji-Biji Initiative</span>
-                    </div>
-                    
-                    <div class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10">
-                        <img src="assets/images/support/mereka.jpg" alt="Mereka" class="supporter-logo w-32 h-16 object-contain mb-3">
-                        <span class="supporter-name text-white font-medium">Mereka</span>
-                    </div>
-                </div>
+    <section
+      id="supporters"
+      class="supporters py-20 px-5 bg-darker target-section"
+    >
+      <div class="max-w-7xl mx-auto">
+        <h2
+          class="supporters-title text-3xl md:text-4xl font-bold text-center mb-16 relative"
+        >
+          Didukung Oleh
+          <span
+            class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-primary to-yellow-500 rounded-full"
+          ></span>
+        </h2>
+
+        <div class="supporters-container overflow-hidden relative py-5">
+          <div class="supporters-track flex w-max animate-scroll">
+            <!-- Supporter Items -->
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Microsoft_Azure_Logo.svg/2560px-Microsoft_Azure_Logo.svg.png"
+                alt="Microsoft Azure"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium"
+                >Microsoft Azure</span
+              >
             </div>
+
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="assets/images/support/elevalte.png"
+                alt="Elevalte"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium"
+                >Elevalte</span
+              >
+            </div>
+
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="assets/images/support/biji_biji.png"
+                alt="Biji-Biji Initiative"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium"
+                >Biji-Biji Initiative</span
+              >
+            </div>
+
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="assets/images/support/mereka.jpg"
+                alt="Mereka"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium">Mereka</span>
+            </div>
+
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="assets/images/support/binus.png"
+                alt="Binus"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium">Binus</span>
+            </div>
+
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="assets/images/support/great_nusa.png"
+                alt="GreatNusa"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium"
+                >GreatNusa</span
+              >
+            </div>
+
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="assets/images/support/telkom.png"
+                alt="Telkom University"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium"
+                >Telkom University</span
+              >
+            </div>
+
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="assets/images/support/bandung.png"
+                alt="Bandung Techno Park"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium"
+                >Bandung Techno Park</span
+              >
+            </div>
+
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="assets/images/support/ugm.png"
+                alt="UGM"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium"
+                >Universitas Gadjah Mada</span
+              >
+            </div>
+
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="assets/images/support/bradwijaya.png"
+                alt="Universitas Brawijaya"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium"
+                >Universitas Brawijaya</span
+              >
+            </div>
+
+            <!-- Duplicate for seamless loop -->
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Microsoft_Azure_Logo.svg/2560px-Microsoft_Azure_Logo.svg.png"
+                alt="Microsoft Azure"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium"
+                >Microsoft Azure</span
+              >
+            </div>
+
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="assets/images/support/elevalte.png"
+                alt="Elevalte"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium"
+                >Elevalte</span
+              >
+            </div>
+
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="assets/images/support/biji_biji.png"
+                alt="Biji-Biji Initiative"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium"
+                >Biji-Biji Initiative</span
+              >
+            </div>
+
+            <div
+              class="supporter-item mx-6 bg-white/5 rounded-xl p-5 w-48 h-32 flex flex-col justify-center items-center hover:-translate-y-1 hover:bg-primary/10"
+            >
+              <img
+                src="assets/images/support/mereka.jpg"
+                alt="Mereka"
+                class="supporter-logo w-32 h-16 object-contain mb-3"
+              />
+              <span class="supporter-name text-white font-medium">Mereka</span>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="footer bg-[#0d1117] pt-20 pb-10 px-5 md:px-10 lg:px-20 target-section">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
-            <!-- About Column -->
-            <div class="footer-column">
-                <h3 class="text-xl font-bold mb-6 text-primary relative pb-2">
-                    Tentang Cengek
-                    <span class="absolute bottom-0 left-0 w-10 h-1 bg-yellow-500 rounded-full"></span>
-                </h3>
-                <p class="text-gray-400 mb-6">
-                    Cengek adalah platform digital yang berfokus pada penyediaan informasi dan solusi bagi petani cabai dan pelaku usaha di Kabupaten Majalengka.
-                </p>
-                <div class="social-links flex gap-3">
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-all duration-300 hover:-translate-y-1">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-all duration-300 hover:-translate-y-1">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-all duration-300 hover:-translate-y-1">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-all duration-300 hover:-translate-y-1">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Features Column -->
-            <div class="footer-column">
-                <h3 class="text-xl font-bold mb-6 text-primary relative pb-2">
-                    Fitur Utama
-                    <span class="absolute bottom-0 left-0 w-10 h-1 bg-yellow-500 rounded-full"></span>
-                </h3>
-                <ul class="footer-links">
-                    <li class="mb-3">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-bug text-yellow-500 mr-3"></i> Deteksi Penyakit
-                        </a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-chart-line text-yellow-500 mr-3"></i> Analisis Harga
-                        </a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-robot text-yellow-500 mr-3"></i> Tanya AI
-                        </a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-cloud-sun text-yellow-500 mr-3"></i> Rekomendasi Cuaca
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Support Column -->
-            <div class="footer-column">
-                <h3 class="text-xl font-bold mb-6 text-primary relative pb-2">
-                    Dukungan
-                    <span class="absolute bottom-0 left-0 w-10 h-1 bg-yellow-500 rounded-full"></span>
-                </h3>
-                <ul class="footer-links">
-                    <li class="mb-3">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-question-circle text-yellow-500 mr-3"></i> Pusat Bantuan
-                        </a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-envelope text-yellow-500 mr-3"></i> Kontak Kami
-                        </a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-comments text-yellow-500 mr-3"></i> FAQ
-                        </a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-book text-yellow-500 mr-3"></i> Dokumentasi
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Contact Column -->
-            <div class="footer-column">
-                <h3 class="text-xl font-bold mb-6 text-primary relative pb-2">
-                    Kontak
-                    <span class="absolute bottom-0 left-0 w-10 h-1 bg-yellow-500 rounded-full"></span>
-                </h3>
-                <ul class="footer-links">
-                    <li class="mb-3 flex items-start">
-                        <i class="fas fa-map-marker-alt text-yellow-500 mr-3 mt-1"></i>
-                        <span class="text-gray-400">Majalengka, Jawa Barat</span>
-                    </li>
-                    <li class="mb-3 flex items-center">
-                        <i class="fas fa-phone text-yellow-500 mr-3"></i>
-                        <span class="text-gray-400">+62 123 4567 890</span>
-                    </li>
-                    <li class="mb-3 flex items-center">
-                        <i class="fas fa-envelope text-yellow-500 mr-3"></i>
-                        <span class="text-gray-400">info@cengek.app</span>
-                    </li>
-                    <li class="mb-3 flex items-center">
-                        <i class="fas fa-globe text-yellow-500 mr-3"></i>
-                        <span class="text-gray-400">www.cengek.app</span>
-                    </li>
-                </ul>
-            </div>
+    <footer
+      id="contact"
+      class="footer bg-[#0d1117] pt-20 pb-10 px-5 md:px-10 lg:px-20 target-section"
+    >
+      <div
+        class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16"
+      >
+        <!-- About Column -->
+        <div class="footer-column">
+          <h3 class="text-xl font-bold mb-6 text-primary relative pb-2">
+            Tentang Cengek
+            <span
+              class="absolute bottom-0 left-0 w-10 h-1 bg-yellow-500 rounded-full"
+            ></span>
+          </h3>
+          <p class="text-gray-400 mb-6">
+            Cengek adalah platform digital yang berfokus pada penyediaan
+            informasi dan solusi bagi petani cabai dan pelaku usaha di Kabupaten
+            Majalengka.
+          </p>
+          <div class="social-links flex gap-3">
+            <a
+              href="#"
+              class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-all duration-300 hover:-translate-y-1"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a
+              href="#"
+              class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-all duration-300 hover:-translate-y-1"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              href="#"
+              class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-all duration-300 hover:-translate-y-1"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a
+              href="#"
+              class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-all duration-300 hover:-translate-y-1"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
         </div>
-        
-        <div class="copyright pt-10 border-t border-white/10 text-center text-gray-500 text-sm">
-            <p>&copy; 2023 Cengek App. Hak Cipta Dilindungi.</p>
+
+        <!-- Features Column -->
+        <div class="footer-column">
+          <h3 class="text-xl font-bold mb-6 text-primary relative pb-2">
+            Fitur Utama
+            <span
+              class="absolute bottom-0 left-0 w-10 h-1 bg-yellow-500 rounded-full"
+            ></span>
+          </h3>
+          <ul class="footer-links">
+            <li class="mb-3">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors flex items-center"
+              >
+                <i class="fas fa-bug text-yellow-500 mr-3"></i> Deteksi Penyakit
+              </a>
+            </li>
+            <li class="mb-3">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors flex items-center"
+              >
+                <i class="fas fa-chart-line text-yellow-500 mr-3"></i> Analisis
+                Harga
+              </a>
+            </li>
+            <li class="mb-3">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors flex items-center"
+              >
+                <i class="fas fa-robot text-yellow-500 mr-3"></i> Tanya AI
+              </a>
+            </li>
+            <li class="mb-3">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors flex items-center"
+              >
+                <i class="fas fa-cloud-sun text-yellow-500 mr-3"></i>
+                Rekomendasi Cuaca
+              </a>
+            </li>
+          </ul>
         </div>
+
+        <!-- Support Column -->
+        <div class="footer-column">
+          <h3 class="text-xl font-bold mb-6 text-primary relative pb-2">
+            Dukungan
+            <span
+              class="absolute bottom-0 left-0 w-10 h-1 bg-yellow-500 rounded-full"
+            ></span>
+          </h3>
+          <ul class="footer-links">
+            <li class="mb-3">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors flex items-center"
+              >
+                <i class="fas fa-question-circle text-yellow-500 mr-3"></i>
+                Pusat Bantuan
+              </a>
+            </li>
+            <li class="mb-3">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors flex items-center"
+              >
+                <i class="fas fa-envelope text-yellow-500 mr-3"></i> Kontak Kami
+              </a>
+            </li>
+            <li class="mb-3">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors flex items-center"
+              >
+                <i class="fas fa-comments text-yellow-500 mr-3"></i> FAQ
+              </a>
+            </li>
+            <li class="mb-3">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors flex items-center"
+              >
+                <i class="fas fa-book text-yellow-500 mr-3"></i> Dokumentasi
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact Column -->
+        <div class="footer-column">
+          <h3 class="text-xl font-bold mb-6 text-primary relative pb-2">
+            Kontak
+            <span
+              class="absolute bottom-0 left-0 w-10 h-1 bg-yellow-500 rounded-full"
+            ></span>
+          </h3>
+          <ul class="footer-links">
+            <li class="mb-3 flex items-start">
+              <i class="fas fa-map-marker-alt text-yellow-500 mr-3 mt-1"></i>
+              <span class="text-gray-400">Majalengka, Jawa Barat</span>
+            </li>
+            <li class="mb-3 flex items-center">
+              <i class="fas fa-phone text-yellow-500 mr-3"></i>
+              <span class="text-gray-400">+62 123 4567 890</span>
+            </li>
+            <li class="mb-3 flex items-center">
+              <i class="fas fa-envelope text-yellow-500 mr-3"></i>
+              <span class="text-gray-400">info@cengek.app</span>
+            </li>
+            <li class="mb-3 flex items-center">
+              <i class="fas fa-globe text-yellow-500 mr-3"></i>
+              <span class="text-gray-400">www.cengek.app</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="copyright pt-10 border-t border-white/10 text-center text-gray-500 text-sm"
+      >
+        <p>&copy; 2023 Cengek App. Hak Cipta Dilindungi.</p>
+      </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-darker/95', 'shadow-lg');
-                navbar.classList.remove('bg-[#16213e]/85');
-            } else {
-                navbar.classList.remove('bg-darker/95', 'shadow-lg');
-                navbar.classList.add('bg-[#16213e]/85');
+      // Navbar scroll effect
+      window.addEventListener("scroll", function () {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("bg-darker/95", "shadow-lg");
+          navbar.classList.remove("bg-[#16213e]/85");
+        } else {
+          navbar.classList.remove("bg-darker/95", "shadow-lg");
+          navbar.classList.add("bg-[#16213e]/85");
+        }
+      });
+
+      // Mobile menu toggle
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      menuBtn.addEventListener("click", function () {
+        const isOpen = mobileMenu.classList.contains("translate-y-0");
+
+        if (isOpen) {
+          mobileMenu.classList.remove("translate-y-0");
+          mobileMenu.classList.add("-translate-y-full");
+          menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        } else {
+          mobileMenu.classList.remove("-translate-y-full");
+          mobileMenu.classList.add("translate-y-0");
+          menuBtn.innerHTML = '<i class="fas fa-times"></i>';
+        }
+      });
+
+      // Hero content animation
+      document.addEventListener("DOMContentLoaded", function () {
+        const heroContent = document.querySelector(".hero-content");
+        heroContent.classList.add("opacity-0", "translate-y-10");
+
+        setTimeout(() => {
+          heroContent.classList.remove("opacity-0", "translate-y-10");
+          heroContent.classList.add("opacity-100", "translate-y-0");
+        }, 300);
+
+        // Add active class to current section in view
+        const sections = document.querySelectorAll(".target-section");
+        const navLinks = document.querySelectorAll(
+          ".nav-link, .mobile-nav-link"
+        );
+
+        window.addEventListener("scroll", function () {
+          let current = "";
+
+          sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+
+            if (window.scrollY >= sectionTop - 150) {
+              current = section.getAttribute("id");
             }
-        });
-        
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        menuBtn.addEventListener('click', function() {
-            const isOpen = mobileMenu.classList.contains('translate-y-0');
-            
-            if (isOpen) {
-                mobileMenu.classList.remove('translate-y-0');
-                mobileMenu.classList.add('-translate-y-full');
-                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            } else {
-                mobileMenu.classList.remove('-translate-y-full');
-                mobileMenu.classList.add('translate-y-0');
-                menuBtn.innerHTML = '<i class="fas fa-times"></i>';
+          });
+
+          navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href").substring(1) === current) {
+              link.classList.add("active");
+              link.style.color = "#e74c3c"; // primary color
+              if (link.querySelector("span")) {
+                link.querySelector("span").style.width = "100%";
+              }
             }
+          });
         });
-        
-        // Hero content animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const heroContent = document.querySelector('.hero-content');
-            heroContent.classList.add('opacity-0', 'translate-y-10');
-            
-            setTimeout(() => {
-                heroContent.classList.remove('opacity-0', 'translate-y-10');
-                heroContent.classList.add('opacity-100', 'translate-y-0');
-            }, 300);
-            
-            // Add active class to current section in view
-            const sections = document.querySelectorAll('.target-section');
-            const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-            
-            window.addEventListener('scroll', function() {
-                let current = '';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    
-                    if (window.scrollY >= (sectionTop - 150)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').substring(1) === current) {
-                        link.classList.add('active');
-                        link.style.color = '#e74c3c'; // primary color
-                        if (link.querySelector('span')) {
-                            link.querySelector('span').style.width = '100%';
-                        }
-                    }
-                });
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 100,
+              behavior: "smooth",
             });
+
+            // Close mobile menu if open
+            if (mobileMenu.classList.contains("translate-y-0")) {
+              mobileMenu.classList.remove("translate-y-0");
+              mobileMenu.classList.add("-translate-y-full");
+              menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+          }
         });
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (mobileMenu.classList.contains('translate-y-0')) {
-                        mobileMenu.classList.remove('translate-y-0');
-                        mobileMenu.classList.add('-translate-y-full');
-                        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
-                }
-            });
-        });
+      });
     </script>
-</body>
+  </body>
 </html>
